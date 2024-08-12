@@ -10,13 +10,11 @@ import configs from '#nuxt-proxy-party-options'
 
 const proxyHandler = (config: ProxyParty) => {
   return defineEventHandler((event) => {
-    const path = event.context.params?._ ?? '/'
+    let path = '/' + withQuery(event.context.params?._ ?? '', getQuery(event))
 
-    let url = withQuery(joinURL(config.target, path), getQuery(event))
+    path = rewritePath(config.pathRewrite, path)
 
-    if (config.pathRewrite) {
-      url = rewritePath(config.pathRewrite, url)
-    }
+    const url = joinURL(config.target, path)
 
     if (config.handler && typeof config.handler === 'function') {
       config.handler(event)
@@ -29,6 +27,8 @@ const proxyHandler = (config: ProxyParty) => {
 export default defineNitroPlugin(async ({ router }) => {
   try {
     if (Array.isArray(configs)) {
+      consola.start('Nuxt Proxy Party: Started')
+
       configs.forEach((config: ProxyParty) => {
         const handler = proxyHandler(config)
         router.use(config.baseUrl, handler)
@@ -39,6 +39,6 @@ export default defineNitroPlugin(async ({ router }) => {
     }
   }
   catch (e: unknown) {
-    consola.error('Nuxt Proxy Party', (e as Error).message)
+    consola.error(`Nuxt Proxy Party: ${(e as Error).message}`)
   }
 })

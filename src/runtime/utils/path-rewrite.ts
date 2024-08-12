@@ -1,17 +1,17 @@
 import type { ProxyParty } from '../../core'
 
-export const rewritePath = (pathRewrite: ProxyParty['pathRewrite'], url: string) => {
-  if (!pathRewrite) return url
+export const rewritePath = (pathRewrite: ProxyParty['pathRewrite'] | undefined, path: string) => {
+  if (!pathRewrite) return path
 
   if (typeof pathRewrite === 'function') {
-    return pathRewrite(url)
+    return pathRewrite(path)
   }
 
   for (const [pattern, replacement] of Object.entries(pathRewrite)) {
     const regex = new RegExp(pattern)
-    if (regex.test(url)) {
-      return url.replace(regex, replacement)
+    if (regex.test(path)) {
+      return path.replace(regex, replacement)
     }
   }
-  return url
+  return path
 }
