@@ -26,7 +26,8 @@ jobs:
         run: yarn dev:prepare
 
       - name: release
-        run: yarn changelogen --release --publish
+        run: yarn release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NPM_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
