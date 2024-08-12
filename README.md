@@ -7,14 +7,14 @@
 To install `Nuxt Proxy Party`, run the following command:
 
 ```bash
-yarn add -D nuxt-proxy-party
+yarn add -D @radya/nuxt-proxy-party
 ```
 
 After installation, add the module to your `nuxt.config.ts`:
 
 ```typescript
 export default defineNuxtConfig({
-  modules: ['nuxt-proxy-party'],
+  modules: ['@radya/nuxt-proxy-party'],
 })
 ```
 
@@ -35,7 +35,7 @@ To use Nuxt Proxy Party, you need to define your proxy routes within the `server
 ## Simple
 ```typescript
 import { getCookie } from 'h3'
-import { defineProxyParty } from 'nuxt-proxy-party/core'
+import { defineProxyParty } from '@radya/nuxt-proxy-party/core'
 
 export default defineProxyParty([
   {
@@ -50,7 +50,7 @@ export default defineProxyParty([
 
 ```typescript
 import { getCookie } from 'h3'
-import { defineProxyParty } from 'nuxt-proxy-party/core'
+import { defineProxyParty } from '@radya/nuxt-proxy-party/core'
 
 export default defineProxyParty([
   {
