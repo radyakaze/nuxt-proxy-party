@@ -34,7 +34,7 @@ export default defineNuxtModule<ModuleOptions>({
         serverConfig = await readFile(serverConfigPath, 'utf8')
       }
       catch {
-        console.info('Nuxt Proxy Party: No server.config found')
+        console.error('Nuxt Proxy Party: No server.config found')
       }
 
       config.virtual['#nuxt-proxy-party-options'] = serverConfig
