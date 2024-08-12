@@ -1,4 +1,4 @@
-import type { ProxyParty } from '../core'
+import type { ProxyParty } from '../../core'
 
 export const rewritePath = (pathRewrite: ProxyParty['pathRewrite'], url: string) => {
   if (!pathRewrite) return url
