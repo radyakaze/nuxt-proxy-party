@@ -1,6 +1,6 @@
 {
   "name": "nuxt-proxy-party",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nuxt HTTP proxy based on H3",
   "repository": "radyakaze/nuxt-proxy-party",
   "license": "MIT",
