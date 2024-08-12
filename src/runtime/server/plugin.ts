@@ -2,7 +2,7 @@ import { consola } from 'consola'
 import { defineEventHandler, getQuery, proxyRequest } from 'h3'
 import { withQuery, joinURL } from 'ufo'
 import type { ProxyParty } from '../../core'
-import { rewritePath } from '../../utils/path-rewrite'
+import { rewritePath } from '../utils/path-rewrite'
 import { defineNitroPlugin } from '#imports'
 
 // @ts-expect-error virtual file
@@ -33,6 +33,8 @@ export default defineNitroPlugin(async ({ router }) => {
         const handler = proxyHandler(config)
         router.use(config.baseUrl, handler)
         router.use(`${config.baseUrl}/**`, handler)
+
+        consola.success(`[Nuxt Proxy Party] Proxy created: ${config.baseUrl} -> ${config.target}`)
       })
     }
   }
