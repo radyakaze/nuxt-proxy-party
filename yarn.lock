@@ -1844,7 +1844,7 @@ __metadata:
     vitest: "npm:^2.0.5"
     vue-tsc: "npm:^2.0.26"
   bin:
-    nuxt-proxy-party: ./dist/bin/index.mjs
+    nuxt-proxy-party: ./bin/index.mjs
   languageName: unknown
   linkType: soft
 

@@ -15,9 +15,11 @@
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "template",
+    "bin"
   ],
-  "bin": "./dist/bin/index.mjs",
+  "bin": "./bin/index.mjs",
   "scripts": {
     "prepack": "nuxt-module-build build",
     "dev": "nuxi dev playground",
