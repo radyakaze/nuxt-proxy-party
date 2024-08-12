@@ -13,4 +13,9 @@ export default defineBuildConfig({
     },
   ],
   externals: ['h3', 'consola'],
+  declaration: true,
+  rollup: {
+    emitCJS: true,
+    cjsBridge: false,
+  },
 })

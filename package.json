@@ -10,6 +10,11 @@
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
+    },
+    "./core": {
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.cjs",
+      "types": "./dist/core.d.ts"
     }
   },
   "main": "./dist/module.cjs",
