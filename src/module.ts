@@ -29,7 +29,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       let serverConfig = `export default []`
 
-      consola.info('Nuxt Proxy Party: Load server.config')
+      consola.start('Nuxt Proxy Party: Started')
       try {
         serverConfig = await readFile(serverConfigPath, 'utf8')
       }

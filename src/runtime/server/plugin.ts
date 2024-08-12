@@ -33,6 +33,8 @@ export default defineNitroPlugin(async ({ router }) => {
         const handler = proxyHandler(config)
         router.use(config.baseUrl, handler)
         router.use(`${config.baseUrl}/**`, handler)
+
+        consola.success(`[Nuxt Proxy Party] Proxy created: ${config.baseUrl} -> ${config.target}`)
       })
     }
   }
