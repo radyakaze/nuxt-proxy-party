@@ -14,9 +14,6 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: '^3.0.0',
     },
   },
-  defaults: {
-    csrf: true,
-  },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
