@@ -1,6 +1,6 @@
 # Nuxt Proxy Party
 
-`Nuxt Proxy Party` is a module designed to simplify the process of creating proxies using `h3-proxy` in your Nuxt application. This module allows you to easily define and manage proxy routes with custom handlers.
+`Nuxt Proxy Party` is a module designed to simplify the process of creating proxies using `h3` in your Nuxt application. This module allows you to easily define and manage proxy routes with custom handlers.
 
 ## Installation
 
