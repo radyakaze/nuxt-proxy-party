@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
-import { consola } from 'consola'
 import { defineNuxtModule, createResolver, addServerPlugin } from '@nuxt/kit'
+import logger from './runtime/utils/logger'
 
 export interface ModuleOptions {
   //
@@ -19,6 +19,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     const serverConfigPath = await resolver.resolvePath('server.config', {
       cwd: nuxt.options.rootDir,
+      extensions: ['.js', '.mjs', '.ts']
     })
 
     nuxt.hook('nitro:config', async (config) => {
@@ -30,7 +31,7 @@ export default defineNuxtModule<ModuleOptions>({
         serverConfig = await readFile(serverConfigPath, 'utf8')
       }
       catch {
-        consola.error('Nuxt Proxy Party: No server.config found')
+        logger.warn('No server.config found')
       }
 
       config.virtual['#nuxt-proxy-party-options'] = serverConfig

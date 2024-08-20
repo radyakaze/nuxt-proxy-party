@@ -1,8 +1,8 @@
-import { consola } from 'consola'
 import { defineEventHandler, getQuery, proxyRequest } from 'h3'
 import { withQuery, joinURL } from 'ufo'
 import type { ProxyParty } from '../../core'
 import { rewritePath } from '../utils/path-rewrite'
+import logger from '../utils/logger'
 import { defineNitroPlugin } from '#imports'
 
 // @ts-expect-error virtual file
@@ -20,25 +20,34 @@ const proxyHandler = (config: ProxyParty) => {
       config.handler(event)
     }
 
-    return proxyRequest(event, url)
+    if (config.enableLogger) {
+      logger.success(`(${config.name || 'no name'})`, `Proxy path "${event.path}" accessed, forwarding to "${url}"`)
+    }
+
+    return proxyRequest(event, url, config.proxyOptions)
   })
 }
 
 export default defineNitroPlugin(async ({ router }) => {
   try {
     if (Array.isArray(configs)) {
-      consola.start('Nuxt Proxy Party: Started')
+      logger.start('Started')
 
       configs.forEach((config: ProxyParty) => {
-        const handler = proxyHandler(config)
-        router.use(config.baseUrl, handler)
-        router.use(`${config.baseUrl}/**`, handler)
+        if (config.target) {
+          const handler = proxyHandler(config)
+          router.use(config.baseUrl, handler)
+          router.use(`${config.baseUrl}/**`, handler)
 
-        consola.success(`[Nuxt Proxy Party] Proxy created: ${config.baseUrl} -> ${config.target}`)
+          logger.success(`Proxy successfully created: ${config.baseUrl} -> ${config.target}`)
+        }
+        else {
+          logger.warn(`Skipping creation of proxy for "${config.baseUrl}" due to missing target`)
+        }
       })
     }
   }
   catch (e: unknown) {
-    consola.error(`Nuxt Proxy Party: ${(e as Error).message}`)
+    logger.error(`Error: ${(e as Error).message}`)
   }
 })
