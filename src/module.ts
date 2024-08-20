@@ -19,7 +19,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     const serverConfigPath = await resolver.resolvePath('server.config', {
       cwd: nuxt.options.rootDir,
-      extensions: ['.js', '.mjs', '.ts']
+      extensions: ['.js', '.mjs', '.ts'],
     })
 
     nuxt.hook('nitro:config', async (config) => {
