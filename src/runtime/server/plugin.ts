@@ -39,10 +39,10 @@ export default defineNitroPlugin(async ({ router }) => {
           router.use(config.baseUrl, handler)
           router.use(`${config.baseUrl}/**`, handler)
 
-          logger.success(`Proxy successfully created: ${config.baseUrl} -> ${config.target}`)
+          logger.success(`(${config.name || 'no name'})`, `Proxy successfully created: ${config.baseUrl} -> ${config.target}`)
         }
         else {
-          logger.warn(`Skipping creation of proxy for "${config.baseUrl}" due to missing target`)
+          logger.warn(`(${config.name || 'no name'})`, `Skipping creation of proxy for "${config.baseUrl}" due to missing target`)
         }
       })
     }
