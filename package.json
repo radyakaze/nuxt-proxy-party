@@ -5,6 +5,12 @@
   "repository": "radyakaze/nuxt-proxy-party",
   "license": "MIT",
   "type": "module",
+  "keywords": [
+    "nuxt",
+    "proxy",
+    "http proxy",
+    "nuxt http proxy"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
