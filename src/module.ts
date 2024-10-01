@@ -3,7 +3,7 @@ import { defineNuxtModule, createResolver, addServerPlugin } from '@nuxt/kit'
 import logger from './runtime/utils/logger'
 
 export interface ModuleOptions {
-  //
+  configFile?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -14,12 +14,15 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: '^3.0.0',
     },
   },
-  async setup(_options, nuxt) {
+  defaults: {
+    configFile: 'server.config',
+  },
+  async setup(options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
     nuxt.options.alias['#nuxt-proxy-party'] = resolver.resolve('./core')
 
-    const serverConfigPath = await resolver.resolvePath('server.config', {
+    const serverConfigPath = await resolver.resolvePath(options.configFile ?? 'server.config', {
       cwd: nuxt.options.rootDir,
       extensions: ['.js', '.mjs', '.ts'],
     })
@@ -33,7 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
         serverConfig = await readFile(serverConfigPath, 'utf8')
       }
       catch {
-        logger.warn('No server.config found')
+        logger.warn('No config found')
       }
 
       config.virtual['#nuxt-proxy-party-options'] = serverConfig
