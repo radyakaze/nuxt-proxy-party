@@ -43,7 +43,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.12.4",
+    "@nuxt/kit": "^3.13.2",
     "citty": "^0.1.6"
   },
   "devDependencies": {
@@ -56,10 +56,10 @@
     "@vitest/ui": "^2.0.5",
     "changelogen": "^0.5.5",
     "eslint": "^9.7.0",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.2",
     "typescript": "latest",
     "vitest": "^2.0.5",
     "vue-tsc": "^2.0.26"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.5.0"
 }
