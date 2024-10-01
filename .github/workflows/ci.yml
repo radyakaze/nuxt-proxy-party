@@ -17,10 +17,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npx nypm@latest i
+        run: yarn install --immutable
+
+      - name: Generate types
+        run: yarn dev:prepare
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
   # test:
   #   runs-on: ubuntu-latest

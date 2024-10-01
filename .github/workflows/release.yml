@@ -26,8 +26,11 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Prepare build environment
+      - name: Generate types
         run: yarn dev:prepare
+
+      - name: Lint
+        run: yarn lint
 
       - name: release
         run: yarn release
