@@ -35,7 +35,7 @@ To use Nuxt Proxy Party, you need to define your proxy routes within the `server
 ## Simple
 ```typescript
 import { getCookie } from 'h3'
-import { defineProxyParty } from '@radya/nuxt-proxy-party/core'
+import { defineProxyParty } from '#nuxt-proxy-party'
 
 export default defineProxyParty([
   {
@@ -50,7 +50,7 @@ export default defineProxyParty([
 
 ```typescript
 import { getCookie } from 'h3'
-import { defineProxyParty } from '@radya/nuxt-proxy-party/core'
+import { defineProxyParty } from '#nuxt-proxy-party'
 
 export default defineProxyParty([
   {

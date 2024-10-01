@@ -1,5 +1,5 @@
 import { getCookie } from 'h3'
-import { defineProxyParty } from '../src/core'
+import { defineProxyParty } from '#nuxt-proxy-party'
 import { useRuntimeConfig } from '#imports'
 
 const config = useRuntimeConfig()

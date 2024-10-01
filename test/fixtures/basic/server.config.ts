@@ -1,11 +1,11 @@
 import { getCookie } from 'h3'
-import { defineProxyParty } from '../../../src/core'
+import { defineProxyParty } from '#nuxt-proxy-party'
 
 export default defineProxyParty([
   {
     name: 'bin',
     baseUrl: '/api/bin',
-    target: '/api/example',
+    target: 'http://httpbin.org',
     handler: (event) => {
       const token = getCookie(event, 'oauth/token')
 

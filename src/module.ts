@@ -17,6 +17,8 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
+    nuxt.options.alias['#nuxt-proxy-party'] = resolver.resolve('./core')
+
     const serverConfigPath = await resolver.resolvePath('server.config', {
       cwd: nuxt.options.rootDir,
       extensions: ['.js', '.mjs', '.ts'],
