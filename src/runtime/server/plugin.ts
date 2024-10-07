@@ -17,7 +17,7 @@ const proxyHandler = (config: ProxyParty) => {
     const url = joinURL(config.target, path)
 
     if (typeof config.handler === 'function') {
-      if (config.handler instanceof Promise) {
+      if (config.handler.constructor.name == 'AsyncFunction') {
         await config.handler(event)
       }
       else {
@@ -30,7 +30,7 @@ const proxyHandler = (config: ProxyParty) => {
     }
 
     const options = typeof config.proxyOptions === 'function'
-      ? config.proxyOptions instanceof Promise
+      ? config.proxyOptions.constructor.name == 'AsyncFunction'
         ? await config.proxyOptions(event)
         : config.proxyOptions(event)
       : config.proxyOptions
