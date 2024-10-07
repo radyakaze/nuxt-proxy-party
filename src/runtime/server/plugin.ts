@@ -24,7 +24,9 @@ const proxyHandler = (config: ProxyParty) => {
       logger.success(`(${config.name || 'no name'})`, `Proxy path "${event.path}" accessed, forwarding to "${url}"`)
     }
 
-    return proxyRequest(event, url, config.proxyOptions)
+    const options = typeof config.proxyOptions === 'function' ? config.proxyOptions(event) : config.proxyOptions
+
+    return proxyRequest(event, url, options)
   })
 }
 

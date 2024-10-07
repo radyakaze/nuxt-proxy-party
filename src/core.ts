@@ -9,7 +9,7 @@ export interface ProxyParty {
   handler?: DefineProxyPartyHandler
   pathRewrite?: { [s: string]: string } | ((path: string) => string)
   enableLogger?: boolean
-  proxyOptions?: ProxyOptions
+  proxyOptions?: ProxyOptions | ((event: H3Event) => ProxyOptions)
 }
 
 export const defineProxyParty = (proxies: ProxyParty[]) => proxies
