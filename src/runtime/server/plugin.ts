@@ -1,4 +1,4 @@
-import { defineEventHandler, getQuery, proxyRequest } from 'h3'
+import { defineEventHandler, getQuery, proxyRequest, type ProxyOptions } from 'h3'
 import { withQuery, joinURL } from 'ufo'
 import type { ProxyParty } from '../../core'
 import { rewritePath } from '../utils/path-rewrite'
@@ -9,24 +9,33 @@ import { defineNitroPlugin } from '#imports'
 import configs from '#nuxt-proxy-party-options'
 
 const proxyHandler = (config: ProxyParty) => {
-  return defineEventHandler((event) => {
+  return defineEventHandler(async (event) => {
     let path = '/' + withQuery(event.context.params?._ ?? '', getQuery(event))
 
     path = rewritePath(config.pathRewrite, path)
 
     const url = joinURL(config.target, path)
 
-    if (config.handler && typeof config.handler === 'function') {
-      config.handler(event)
+    if (typeof config.handler === 'function') {
+      if (config.handler instanceof Promise) {
+        await config.handler(event)
+      }
+      else {
+        config.handler(event)
+      }
     }
 
     if (config.enableLogger) {
       logger.success(`(${config.name || 'no name'})`, `Proxy path "${event.path}" accessed, forwarding to "${url}"`)
     }
 
-    const options = typeof config.proxyOptions === 'function' ? config.proxyOptions(event) : config.proxyOptions
+    const options = typeof config.proxyOptions === 'function'
+      ? config.proxyOptions instanceof Promise
+        ? await config.proxyOptions(event)
+        : config.proxyOptions(event)
+      : config.proxyOptions
 
-    return proxyRequest(event, url, options)
+    return proxyRequest(event, url, options as ProxyOptions)
   })
 }
 
